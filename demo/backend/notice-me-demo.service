@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=5
 User=root
-ExecStart=/var/www/noticeme/demo/backend/notice-me-demo
+ExecStart=/var/www/noticeme_landing/demo/backend/notice-me-demo
 
 [Install]
 WantedBy=multi-user.target
