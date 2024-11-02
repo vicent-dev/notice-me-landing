@@ -32,7 +32,7 @@ function App() {
         justifyContent="center"
       >
         <Box mb={2}>
-          <h1>Noticeme</h1>
+          <h1>Notice-me</h1>
         </Box>
         <PublishNotificationForm
           clientId={clientId}
