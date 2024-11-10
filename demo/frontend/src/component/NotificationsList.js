@@ -3,7 +3,7 @@ import {DataGrid} from '@mui/x-data-grid';
 import {api} from "../util/api";
 import {Button} from "@mui/material";
 import toast from "react-hot-toast";
-import {CircularProgress} from "@mui/joy";
+import {ButtonGroup, CircularProgress} from "@mui/joy";
 
 export default function NotificationsList({refreshNotifications, setRefreshNotifications}) {
   const [notifications, setNotifications] = useState(null);
@@ -45,6 +45,22 @@ export default function NotificationsList({refreshNotifications, setRefreshNotif
       });
   }
 
+  function notifyNotification(id){
+    api()
+      .get(`/notifications/notify/${id}`)
+      .then(() => {
+        setRefreshNotifications(true);
+      })
+      .catch((error) => {
+        let errorMsg = 'Something went wrong, try again later';
+        if(error.status === 400) {
+          errorMsg = error.response.data.error;
+          console.log('errrrorr',error)
+        }
+        toast.error(errorMsg);
+      });
+  }
+
 
   const columns = [
     {
@@ -77,15 +93,26 @@ export default function NotificationsList({refreshNotifications, setRefreshNotif
     {
       field: 'ID',
       headerName: '',
+      width:300,
       renderCell: (params) => (
-        <Button
-          variant="contained"
-          size="small"
-          color={'warning'}
-          onClick={() => deleteNotification(params.value)}
-        >
-          Delete
-        </Button>
+        <ButtonGroup variant="contained" aria-label="Basic button group">
+          <Button
+            variant="contained"
+            size="small"
+            color={'success'}
+            onClick={() => notifyNotification(params.value)}
+          >
+            Notify
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            color={'warning'}
+            onClick={() => deleteNotification(params.value)}
+          >
+            Delete
+          </Button>
+        </ButtonGroup>
       )
     }
   ];
