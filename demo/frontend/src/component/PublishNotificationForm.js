@@ -1,4 +1,4 @@
-import {Button, TextField} from "@mui/material";
+import {FormControlLabel, Button, Checkbox, TextField} from "@mui/material";
 import {Grid} from "@mui/system";
 import {api} from "../util/api";
 import '../index.css';
@@ -12,6 +12,7 @@ export default function PublishNotificationForm({clientId, clientGroupId, setRef
       "clientId": event.target.clientId.value,
       "clientGroupId": event.target.clientGroupId.value ?? '',
       "body": event.target.body.value,
+      "instant": event.target.instant.checked,
     })
       .then(() => setRefreshNotifications(true))
       .catch((error) => {
@@ -60,7 +61,18 @@ export default function PublishNotificationForm({clientId, clientGroupId, setRef
             required
           />
         </Grid>
-
+        <Grid mb={2} item>
+          <FormControlLabel control={
+            <Checkbox
+              name="instant"
+              label="Instant"
+              variant="outlined"
+              defaultChecked
+            />
+          } 
+          label="Instant" 
+          />
+        </Grid>
         <Grid mb={2} item spacing={2}>
           <Button type="submit" variant="contained" color="primary">
             Publish Notification
