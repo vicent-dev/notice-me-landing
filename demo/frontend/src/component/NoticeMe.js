@@ -30,8 +30,6 @@ export default function NoticeMe({clientId, clientGroupId, setRefreshNotificatio
       };
 
       client.onmessage = message => {
-        console.log(message.data);
-
         //check errors
         try {
           let jsonMessage = JSON.parse(message.data);
