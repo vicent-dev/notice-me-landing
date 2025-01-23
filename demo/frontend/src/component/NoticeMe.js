@@ -30,6 +30,20 @@ export default function NoticeMe({clientId, clientGroupId, setRefreshNotificatio
       };
 
       client.onmessage = message => {
+        console.log(message.data);
+
+        //check errors
+        try {
+          let jsonMessage = JSON.parse(message.data);
+
+          if(jsonMessage['error']) {
+            toast.error(() => <span dangerouslySetInnerHTML={{__html: jsonMessage['error']}}></span>);
+            return;
+          }
+        } catch(e) {
+          console.error(e);
+        }
+
         toast.success(() => <>
           <span dangerouslySetInnerHTML={{__html: message.data}}></span>
         </>);

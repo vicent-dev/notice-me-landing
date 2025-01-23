@@ -13,6 +13,7 @@ export default function PublishNotificationForm({clientId, clientGroupId, setRef
       "clientGroupId": event.target.clientGroupId.value ?? '',
       "body": event.target.body.value,
       "instant": event.target.instant.checked,
+      "originClientId": clientId,
     })
       .then(() => setRefreshNotifications(true))
       .catch((error) => {
@@ -22,63 +23,68 @@ export default function PublishNotificationForm({clientId, clientGroupId, setRef
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <Grid mb={4} item spacing={2}>
-          <h4>Change Client Id/Client Group Id input value to "*" to publish to all clients/groups on this server.</h4>
-          <ul>
-            <li>User ID: <b className={'pointerOnHover'}
-                            onClick={() => navigator.clipboard.writeText(clientId)}>{clientId}</b></li>
-            <li>Group ID: <b className={'pointerOnHover'}
-                             onClick={() => navigator.clipboard.writeText(clientGroupId)}>{clientGroupId}</b></li>
-          </ul>
-        </Grid>
+    <Grid mt={-10} container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+      <Grid item xs={12} sm={8} md={6}>
+        <form onSubmit={handleSubmit}>
+          <Grid mb={4} item spacing={2}>
+            <h4>To publish to all clients/groups on this server, set the Client ID/Client Group ID input value to "*".</h4>
+            <ul>
+              <li>User ID: <b className={'pointerOnHover'}
+                              onClick={() => navigator.clipboard.writeText(clientId)}>{clientId}</b></li>
+              <li>Group ID: <b className={'pointerOnHover'}
+                               onClick={() => navigator.clipboard.writeText(clientGroupId)}>{clientGroupId}</b></li>
+            </ul>
+          </Grid>
 
-        <Grid mb={2} item>
-          <TextField
-            name="clientId"
-            label="Client ID"
-            variant="outlined"
-            defaultValue={clientId}
-            required
-          />
-        </Grid>
-        <Grid mb={2} item>
-          <TextField
-            name="clientGroupId"
-            label="Client Group ID"
-            variant="outlined"
-            defaultValue={clientGroupId}
-          />
-        </Grid>
-        <Grid mb={2} item>
-          <TextField
-            name="body"
-            label="Body"
-            variant="outlined"
-            placeholder={"Write your notification body"}
-            defaultValue={'foo bar'}
-            required
-          />
-        </Grid>
-        <Grid mb={2} item>
-          <FormControlLabel control={
-            <Checkbox
-              name="instant"
-              label="Instant"
+          <Grid mb={2} item>
+            <TextField
+              name="clientId"
+              label="Client ID"
               variant="outlined"
-              defaultChecked
+              defaultValue={clientId}
+              required
+              fullWidth
             />
-          } 
-          label="Instant" 
-          />
-        </Grid>
-        <Grid mb={2} item spacing={2}>
-          <Button type="submit" variant="contained" color="primary">
-            Publish Notification
-          </Button>
-        </Grid>
-      </form>
-    </>
+          </Grid>
+          <Grid mb={2} item>
+            <TextField
+              name="clientGroupId"
+              label="Client Group ID"
+              variant="outlined"
+              defaultValue={clientGroupId}
+              fullWidth
+            />
+          </Grid>
+          <Grid mb={2} item>
+            <TextField
+              name="body"
+              label="Body"
+              variant="outlined"
+              placeholder={"Write your notification body"}
+              defaultValue={'foo bar'}
+              required
+              fullWidth
+            />
+          </Grid>
+          <Grid mb={2} item>
+            <FormControlLabel control={
+              <Checkbox
+                name="instant"
+                label="Instant"
+                variant="outlined"
+                defaultChecked
+              />
+            } 
+            label="Instant" 
+            />
+          </Grid>
+          <Grid mb={2} item spacing={2}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Publish Notification
+            </Button>
+          </Grid>
+        </form>
+      </Grid>
+    </Grid>
   );
 }

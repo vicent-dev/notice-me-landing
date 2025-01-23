@@ -31,8 +31,11 @@ function App() {
         direction="column"
         justifyContent="center"
       >
-        <Box mb={2}>
-          <h1>Notice-me</h1>
+        <Box textAlign="center">
+          <h1 style={{ fontSize: '3rem', color: '#3f51b5' }}>Notice-me</h1>
+          <p style={{ fontSize: '1.2rem', color: '#555' }}>
+            A powerful notification system for your applications.
+          </p>
         </Box>
         <PublishNotificationForm
           clientId={clientId}
