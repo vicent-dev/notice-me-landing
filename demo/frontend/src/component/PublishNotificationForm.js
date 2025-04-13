@@ -4,20 +4,20 @@ import {api} from "../util/api";
 import '../index.css';
 import toast from "react-hot-toast";
 
-export default function PublishNotificationForm({clientId, clientGroupId, setRefreshNotifications}) {
+export default function PublishNotificationForm({clientId, clientGroupId}) {
   const handleSubmit = (event) => {
     event.preventDefault();
+    const instant = event.target.instant.checked;
 
     api().post('/notifications', {
       "clientId": event.target.clientId.value,
       "clientGroupId": event.target.clientGroupId.value ?? '',
       "body": event.target.body.value,
-      "instant": event.target.instant.checked,
+      "instant": instant,
       "originClientId": clientId,
     })
-      .then(() => setRefreshNotifications(true))
+      .then(() => {})
       .catch((error) => {
-        console.log(error);
         toast.error('Something went wrong, try again later');
       });
   }

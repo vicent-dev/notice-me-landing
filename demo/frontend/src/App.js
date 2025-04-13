@@ -22,7 +22,6 @@ const groupIds = [
 const clientGroupId = groupIds[Math.floor(Math.random() * groupIds.length)];
 
 function App() {
-  const [refreshNotifications, setRefreshNotifications] = useState(true);
 
   return (
     <>
@@ -40,18 +39,12 @@ function App() {
         <PublishNotificationForm
           clientId={clientId}
           clientGroupId={clientGroupId}
-          setRefreshNotifications={setRefreshNotifications}
         />
-        <Divider />
-        <NotificationsList
-          refreshNotifications={refreshNotifications}
-          setRefreshNotifications={setRefreshNotifications}
-        />
+        <NotificationsList />
       </Grid>
       <NoticeMe
         clientId={clientId}
         clientGroupId={clientGroupId}
-        setRefreshNotifications={setRefreshNotifications}
       />
     </>
   );
