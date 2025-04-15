@@ -17,8 +17,8 @@ export default function NotificationsList() {
         api().get(`/notifications?page=${currentPage + 1}&pageSize=${currentPageSize}`)
             .then((result) => {
                 if (result && result.data) {
-                    setNotifications(result.data.rows);
-                    setRowCount(result.data.total_rows); // Update total row count
+                    setNotifications(result.data.Rows);
+                    setRowCount(result.data.TotalRows); // Update total row count
                 } else {
                     setNotifications([]);
                     setRowCount(0);

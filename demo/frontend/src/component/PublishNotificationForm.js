@@ -10,11 +10,11 @@ export default function PublishNotificationForm({clientId, clientGroupId}) {
     const instant = event.target.instant.checked;
 
     api().post('/notifications', {
-      "clientId": event.target.clientId.value,
-      "clientGroupId": event.target.clientGroupId.value ?? '',
-      "body": event.target.body.value,
-      "instant": instant,
-      "originClientId": clientId,
+      "ClientId": event.target.clientId.value,
+      "ClientGroupId": event.target.clientGroupId.value ?? '',
+      "Body": event.target.body.value,
+      "Instant": instant,
+      "OriginClientId": clientId,
     })
       .then(() => {})
       .catch((error) => {
