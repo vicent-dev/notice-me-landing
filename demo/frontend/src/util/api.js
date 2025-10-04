@@ -24,7 +24,12 @@ export function getWebsocketBaseURL() {
 }
 
 export function api() {
+  const apiKeyHeaderValue = process.env.REACT_APP_NOTICEME_API_KEY_HEADER_VALUE;
+
   return axios.create({
     baseURL: getApiBaseURL(),
+    headers: {
+      'X-API-KEY': apiKeyHeaderValue,
+    }
   });
 }
